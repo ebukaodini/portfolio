@@ -18,7 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatDate } from "@/utils/cn";
+import { formatDate } from "@/utils/date";
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
 
 // Mock data for blog posts

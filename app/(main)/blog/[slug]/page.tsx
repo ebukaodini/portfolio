@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ArrowLeft, CalendarIcon, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatDate } from "@/utils/cn";
+import { formatDate } from "@/utils/date";
 
 // This is a placeholder for the blog post page
 // In a real application, you would fetch the blog post data based on the slug
