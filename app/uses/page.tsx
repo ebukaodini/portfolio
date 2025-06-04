@@ -1,19 +1,39 @@
-import type React from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Code, Terminal, Layers, Palette, Zap, Laptop, Coffee, Headphones, BookOpen, ExternalLink } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import type React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  Code,
+  Terminal,
+  Layers,
+  Palette,
+  Zap,
+  Laptop,
+  Coffee,
+  Headphones,
+  BookOpen,
+  ExternalLink,
+} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function UsesPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-4 py-12 md:px-6 md:py-20">
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-12 md:px-60 md:py-20">
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">My Setup & Tools</h1>
-          <p className="mt-4 text-lg text-gray-600">
-            A comprehensive list of all the tools, apps, hardware, and services I use on a daily basis.
+          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
+            My Setup & Tools
+          </h1>
+          <p className="mt-4 text-lg text-muted-foreground">
+            A comprehensive list of all the tools, apps, hardware, and services
+            I use on a daily basis.
           </p>
         </div>
 
@@ -27,7 +47,11 @@ export default function UsesPage() {
           {/* Software & Tools Tab */}
           <TabsContent value="software" className="space-y-12">
             {/* Editor & IDE Section */}
-            <Section icon={<Code />} title="Editor & IDE" description="The tools I use to write and edit code.">
+            <Section
+              icon={<Code />}
+              title="Editor & IDE"
+              description="The tools I use to write and edit code."
+            >
               <ToolCard
                 title="Visual Studio Code"
                 description="My primary code editor for most projects. I've customized it extensively with extensions and settings."
@@ -36,7 +60,7 @@ export default function UsesPage() {
               >
                 <div className="mt-4 space-y-2">
                   <h4 className="font-medium">Favorite Extensions:</h4>
-                  <ul className="ml-5 list-disc text-sm text-gray-600">
+                  <ul className="ml-5 list-disc text-sm text-muted-foreground">
                     <li>GitHub Copilot</li>
                     <li>ESLint</li>
                     <li>Prettier</li>
@@ -46,9 +70,10 @@ export default function UsesPage() {
                 </div>
                 <div className="mt-4 space-y-2">
                   <h4 className="font-medium">Theme:</h4>
-                  <p className="text-sm text-gray-600">
-                    I use the <span className="font-medium">Night Owl</span> theme by Sarah Drasner with a few custom
-                    tweaks for better contrast.
+                  <p className="text-sm text-muted-foreground">
+                    I use the <span className="font-medium">Night Owl</span>{" "}
+                    theme by Sarah Drasner with a few custom tweaks for better
+                    contrast.
                   </p>
                 </div>
               </ToolCard>
@@ -101,7 +126,7 @@ export default function UsesPage() {
               >
                 <div className="mt-4 space-y-2">
                   <h4 className="font-medium">Favorite Plugins:</h4>
-                  <ul className="ml-5 list-disc text-sm text-gray-600">
+                  <ul className="ml-5 list-disc text-sm text-muted-foreground">
                     <li>git</li>
                     <li>node</li>
                     <li>docker</li>
@@ -155,7 +180,11 @@ export default function UsesPage() {
             </Section>
 
             {/* Design Tools Section */}
-            <Section icon={<Palette />} title="Design Tools" description="Tools I use for design and visual work.">
+            <Section
+              icon={<Palette />}
+              title="Design Tools"
+              description="Tools I use for design and visual work."
+            >
               <ToolCard
                 title="Figma"
                 description="Collaborative interface design tool that I use for wireframing, prototyping, and design systems."
@@ -192,7 +221,7 @@ export default function UsesPage() {
               >
                 <div className="mt-4 space-y-2">
                   <h4 className="font-medium">Common Workflows:</h4>
-                  <ul className="ml-5 list-disc text-sm text-gray-600">
+                  <ul className="ml-5 list-disc text-sm text-muted-foreground">
                     <li>Automated testing on pull requests</li>
                     <li>Dependency updates with Dependabot</li>
                     <li>Automated deployments to staging/production</li>
@@ -339,7 +368,7 @@ export default function UsesPage() {
               >
                 <div className="mt-4 space-y-2">
                   <h4 className="font-medium">How I Use It:</h4>
-                  <ul className="ml-5 list-disc text-sm text-gray-600">
+                  <ul className="ml-5 list-disc text-sm text-muted-foreground">
                     <li>Project documentation and planning</li>
                     <li>Personal knowledge base</li>
                     <li>Meeting notes and action items</li>
@@ -419,7 +448,7 @@ export default function UsesPage() {
               >
                 <div className="mt-4 space-y-2">
                   <h4 className="font-medium">Favorite Tech Podcasts:</h4>
-                  <ul className="ml-5 list-disc text-sm text-gray-600">
+                  <ul className="ml-5 list-disc text-sm text-muted-foreground">
                     <li>Syntax</li>
                     <li>JS Party</li>
                     <li>The Changelog</li>
@@ -431,15 +460,17 @@ export default function UsesPage() {
           </TabsContent>
         </Tabs>
 
-        <div className="mt-16 rounded-lg border bg-gray-50 p-6">
+        <div className="mt-16 rounded-lg border bg-background p-6">
           <h2 className="mb-4 text-xl font-bold">A Note on Tools</h2>
-          <p className="text-gray-600">
-            Tools are just that—tools. They're meant to serve you, not the other way around. I'm constantly
-            experimenting with new tools and workflows, so this page will evolve over time. The best tool is the one
-            that works for you and your specific needs.
+          <p className="text-muted-foreground">
+            Tools are just that—tools. They're meant to serve you, not the other
+            way around. I'm constantly experimenting with new tools and
+            workflows, so this page will evolve over time. The best tool is the
+            one that works for you and your specific needs.
           </p>
-          <p className="mt-4 text-gray-600">
-            If you have questions about any of these tools or want to share your own recommendations, feel free to{" "}
+          <p className="mt-4 text-muted-foreground">
+            If you have questions about any of these tools or want to share your
+            own recommendations, feel free to{" "}
             <Link href="#" className="font-medium text-primary hover:underline">
               reach out
             </Link>
@@ -448,56 +479,73 @@ export default function UsesPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 interface SectionProps {
-  icon: React.ReactNode
-  title: string
-  description: string
-  children: React.ReactNode
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  children: React.ReactNode;
 }
 
 function Section({ icon, title, description, children }: SectionProps) {
   return (
     <section>
       <div className="mb-6 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">{icon}</div>
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+          {icon}
+        </div>
         <h2 className="text-2xl font-bold">{title}</h2>
       </div>
-      <p className="mb-6 text-gray-600">{description}</p>
+      <p className="mb-6 text-muted-foreground">{description}</p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{children}</div>
     </section>
-  )
+  );
 }
 
 interface ToolCardProps {
-  title: string
-  description: string
-  image: string
-  tags: string[]
-  children?: React.ReactNode
-  link?: string
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  children?: React.ReactNode;
+  link?: string;
 }
 
-function ToolCard({ title, description, image, tags, children, link }: ToolCardProps) {
+function ToolCard({
+  title,
+  description,
+  image,
+  tags,
+  children,
+  link,
+}: ToolCardProps) {
   const CardWrapper = ({ children }: { children: React.ReactNode }) => {
     if (link) {
       return (
-        <Link href={link} className="block h-full transition-all hover:opacity-90">
+        <Link
+          href={link}
+          className="block h-full transition-all hover:opacity-90"
+        >
           {children}
         </Link>
-      )
+      );
     }
-    return <>{children}</>
-  }
+    return <>{children}</>;
+  };
 
   return (
     <CardWrapper>
       <Card className="h-full">
         <CardHeader className="flex flex-row items-start gap-4 space-y-0">
           <div className="relative h-12 w-12 overflow-hidden rounded-md">
-            <Image src={image || "/placeholder.svg"} alt={title} fill className="object-cover" />
+            <Image
+              src={image || "/placeholder.svg"}
+              alt={title}
+              fill
+              className="object-cover"
+            />
           </div>
           <div className="space-y-1">
             <CardTitle className="flex items-center gap-2">
@@ -519,5 +567,5 @@ function ToolCard({ title, description, image, tags, children, link }: ToolCardP
         </CardContent>
       </Card>
     </CardWrapper>
-  )
+  );
 }

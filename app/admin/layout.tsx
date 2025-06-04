@@ -1,29 +1,36 @@
-import type React from "react"
-import Link from "next/link"
-import { Laptop, Menu } from "lucide-react"
-import { AdminNav } from "@/components/admin/admin-nav"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { ThemeToggle } from "@/components/theme-toggle"
+import type React from "react";
+import Link from "next/link";
+import { Laptop, Menu } from "lucide-react";
+import { AdminNav } from "@/components/admin/admin-nav";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function AdminLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="shrink-0 md:hidden">
+            <Button
+              variant="outline"
+              size="icon"
+              className="shrink-0 md:hidden"
+            >
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-72 sm:max-w-none">
             <div className="flex h-16 items-center border-b">
-              <Link href="/admin" className="flex items-center gap-2 font-semibold">
+              <Link
+                href="/admin"
+                className="flex items-center gap-2 font-semibold"
+              >
                 <Laptop className="h-6 w-6" />
                 <span>Portfolio Admin</span>
               </Link>
@@ -32,7 +39,10 @@ export default function AdminLayout({
           </SheetContent>
         </Sheet>
         <div className="flex w-full items-center gap-2 md:ml-0 md:gap-4">
-          <Link href="/admin" className="hidden items-center gap-2 font-semibold md:flex">
+          <Link
+            href="/admin"
+            className="hidden items-center gap-2 font-semibold md:flex"
+          >
             <Laptop className="h-6 w-6" />
             <span>Portfolio Admin</span>
           </Link>
@@ -57,5 +67,5 @@ export default function AdminLayout({
         <main className="flex flex-1 flex-col overflow-hidden">{children}</main>
       </div>
     </div>
-  )
+  );
 }

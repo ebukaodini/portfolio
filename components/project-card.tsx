@@ -1,21 +1,44 @@
-import Link from "next/link"
-import Image from "next/image"
-import { ExternalLink, Github } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import Link from "next/link";
+import Image from "next/image";
+import { ExternalLink, Github } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 interface ProjectCardProps {
-  slug: string
-  title: string
-  description: string
-  image: string
-  tags: string[]
-  liveUrl?: string
-  githubUrl?: string
+  slug: string;
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  url?: string;
+  githubUrl?: string;
+  details?: {
+    challenge?: string;
+    solution?: string;
+    impact?: string;
+    features?: string[];
+    stack?: string[];
+    screenshots?: string[];
+  };
 }
 
-export function ProjectCard({ slug, title, description, image, tags, liveUrl, githubUrl }: ProjectCardProps) {
+export function ProjectCard({
+  slug,
+  title,
+  description,
+  image,
+  tags,
+  url,
+  githubUrl,
+  details,
+}: ProjectCardProps) {
   return (
     <Card className="group overflow-hidden transition-all duration-300 hover:shadow-lg">
       <div className="relative h-48 w-full overflow-hidden">
@@ -44,23 +67,33 @@ export function ProjectCard({ slug, title, description, image, tags, liveUrl, gi
         </div>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-gray-600">{description}</p>
+        <p className="text-sm text-muted-foreground">{description}</p>
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button asChild>
           <Link href={`/projects/${slug}`}>View Details</Link>
         </Button>
         <div className="flex gap-2">
-          {liveUrl && (
+          {url && (
             <Button variant="ghost" size="icon" asChild>
-              <Link href={liveUrl} target="_blank" rel="noopener noreferrer" aria-label="Live Demo">
+              <Link
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Live Demo"
+              >
                 <ExternalLink className="h-4 w-4" />
               </Link>
             </Button>
           )}
           {githubUrl && (
             <Button variant="ghost" size="icon" asChild>
-              <Link href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository">
+              <Link
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub Repository"
+              >
                 <Github className="h-4 w-4" />
               </Link>
             </Button>
@@ -68,5 +101,5 @@ export function ProjectCard({ slug, title, description, image, tags, liveUrl, gi
         </div>
       </CardFooter>
     </Card>
-  )
+  );
 }

@@ -1,9 +1,21 @@
-import Link from "next/link"
-import Image from "next/image"
-import { CalendarIcon, Clock, Code, FlaskRoundIcon as Flask, Lightbulb, Coffee } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { formatDate } from "@/lib/utils"
+import Link from "next/link";
+import Image from "next/image";
+import {
+  CalendarIcon,
+  Clock,
+  Code,
+  FlaskRoundIcon as Flask,
+  Lightbulb,
+  Coffee,
+} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { formatDate } from "@/utils/date";
 
 // Mock data for blog posts - in a real app, you would fetch this from a CMS or API
 const blogPosts = [
@@ -22,7 +34,8 @@ const blogPosts = [
   {
     id: "react-performance",
     title: "Advanced React Performance Optimization Techniques",
-    excerpt: "Explore advanced techniques to optimize React applications for better performance and user experience.",
+    excerpt:
+      "Explore advanced techniques to optimize React applications for better performance and user experience.",
     publishedAt: "2023-03-22T10:30:00Z",
     readingTime: "12 min read",
     category: "Engineering Notes",
@@ -32,7 +45,8 @@ const blogPosts = [
   {
     id: "typescript-patterns",
     title: "Design Patterns in TypeScript: A Practical Guide",
-    excerpt: "A comprehensive guide to implementing common design patterns in TypeScript with real-world examples.",
+    excerpt:
+      "A comprehensive guide to implementing common design patterns in TypeScript with real-world examples.",
     publishedAt: "2023-02-18T08:45:00Z",
     readingTime: "15 min read",
     category: "Engineering Notes",
@@ -64,7 +78,8 @@ const blogPosts = [
   {
     id: "blockchain-experiments",
     title: "Building a Decentralized Application: Lessons Learned",
-    excerpt: "Insights and challenges from building a decentralized application on Ethereum and IPFS.",
+    excerpt:
+      "Insights and challenges from building a decentralized application on Ethereum and IPFS.",
     publishedAt: "2023-03-12T09:30:00Z",
     readingTime: "14 min read",
     category: "R&D Experiments",
@@ -74,7 +89,8 @@ const blogPosts = [
   {
     id: "senior-engineer-path",
     title: "The Path to Becoming a Senior Software Engineer",
-    excerpt: "Reflections on my journey to becoming a senior software engineer and advice for those on the same path.",
+    excerpt:
+      "Reflections on my journey to becoming a senior software engineer and advice for those on the same path.",
     publishedAt: "2023-05-20T10:00:00Z",
     readingTime: "7 min read",
     category: "Career Insights",
@@ -84,7 +100,8 @@ const blogPosts = [
   {
     id: "tech-interviews",
     title: "Mastering Technical Interviews: A Comprehensive Guide",
-    excerpt: "Strategies and preparation tips for excelling in technical interviews at top tech companies.",
+    excerpt:
+      "Strategies and preparation tips for excelling in technical interviews at top tech companies.",
     publishedAt: "2023-02-28T13:45:00Z",
     readingTime: "11 min read",
     category: "Career Insights",
@@ -135,24 +152,21 @@ const blogPosts = [
     tags: ["Coffee", "Hobbies", "Lifestyle"],
     coverImage: "/placeholder.svg?height=400&width=600",
   },
-]
+];
 
 // Group posts by category
-const groupedPosts = blogPosts.reduce(
-  (acc, post) => {
-    if (!post.featured) {
-      if (!acc[post.category]) {
-        acc[post.category] = []
-      }
-      acc[post.category].push(post)
+const groupedPosts = blogPosts.reduce((acc, post) => {
+  if (!post.featured) {
+    if (!acc[post.category]) {
+      acc[post.category] = [];
     }
-    return acc
-  },
-  {} as Record<string, typeof blogPosts>,
-)
+    acc[post.category].push(post);
+  }
+  return acc;
+}, {} as Record<string, typeof blogPosts>);
 
 // Get featured post
-const featuredPost = blogPosts.find((post) => post.featured)
+const featuredPost = blogPosts.find((post) => post.featured);
 
 // Category icons mapping
 const categoryIcons = {
@@ -160,16 +174,19 @@ const categoryIcons = {
   "R&D Experiments": <Flask className="h-5 w-5" />,
   "Career Insights": <Lightbulb className="h-5 w-5" />,
   "Life Beyond Code": <Coffee className="h-5 w-5" />,
-}
+};
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <div className="container mx-auto px-4 py-12 md:px-6 md:py-20">
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-12 md:px-60 md:py-20">
         <div className="mb-12 text-center">
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">Ebuka's Blog</h1>
-          <p className="mt-4 text-lg text-gray-600">
-            Thoughts, insights, and explorations in software engineering and beyond
+          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
+            Ebuka's Blog
+          </h1>
+          <p className="mt-4 text-lg text-muted-foreground">
+            Thoughts, insights, and explorations in software engineering and
+            beyond
           </p>
         </div>
 
@@ -206,7 +223,9 @@ export default function BlogPage() {
                   <h2 className="mb-3 text-2xl font-bold transition-colors group-hover:text-primary md:text-3xl">
                     {featuredPost.title}
                   </h2>
-                  <p className="mb-4 text-gray-600">{featuredPost.excerpt}</p>
+                  <p className="mb-4 text-muted-foreground">
+                    {featuredPost.excerpt}
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {featuredPost.tags.map((tag) => (
                       <Badge key={tag} variant="secondary">
@@ -238,19 +257,19 @@ export default function BlogPage() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 interface BlogPost {
-  id: string
-  title: string
-  excerpt: string
-  publishedAt: string
-  readingTime: string
-  category: string
-  tags: string[]
-  coverImage: string
-  featured?: boolean
+  id: string;
+  title: string;
+  excerpt: string;
+  publishedAt: string;
+  readingTime: string;
+  category: string;
+  tags: string[];
+  coverImage: string;
+  featured?: boolean;
 }
 
 function BlogPostCard({ post }: { post: BlogPost }) {
@@ -274,7 +293,9 @@ function BlogPostCard({ post }: { post: BlogPost }) {
           <h3 className="line-clamp-2 text-lg font-bold">{post.title}</h3>
         </CardHeader>
         <CardContent className="p-4 pt-2">
-          <p className="line-clamp-3 text-sm text-gray-600">{post.excerpt}</p>
+          <p className="line-clamp-3 text-sm text-muted-foreground">
+            {post.excerpt}
+          </p>
         </CardContent>
         <CardFooter className="flex justify-between p-4 pt-0">
           <div className="flex items-center text-xs text-gray-500">
@@ -288,5 +309,5 @@ function BlogPostCard({ post }: { post: BlogPost }) {
         </CardFooter>
       </Card>
     </Link>
-  )
+  );
 }

@@ -1,62 +1,82 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Github, Linkedin, Twitter, Mail, Send, Calendar, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { useToast } from "@/hooks/use-toast"
-import { cn } from "@/lib/utils"
+import { useState } from "react";
+import Link from "next/link";
+import {
+  Github,
+  Linkedin,
+  Twitter,
+  Mail,
+  Send,
+  Calendar,
+  ArrowRight,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/utils/cn";
 
 export default function ContactPage() {
-  const { toast } = useToast()
+  const { toast } = useToast();
   const [formState, setFormState] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormState((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    await new Promise((resolve) => setTimeout(resolve, 1500));
 
     toast({
       title: "Message sent!",
       description: "Thanks for reaching out. I'll get back to you soon.",
-    })
+    });
 
     setFormState({
       name: "",
       email: "",
       subject: "",
       message: "",
-    })
-    setIsSubmitting(false)
-  }
+    });
+    setIsSubmitting(false);
+  };
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-12 md:px-6 md:py-20">
+      <div className="container mx-auto px-4 py-12 md:px-60 md:py-20">
         <div className="mx-auto max-w-4xl">
           <div className="mb-12 text-center">
-            <h1 className="text-4xl font-bold tracking-tight md:text-5xl">Get in Touch</h1>
+            <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
+              Get in Touch
+            </h1>
             <p className="mt-4 text-lg text-muted-foreground">
-              Let's build something great together. I'm always open to new opportunities and collaborations.
+              Let's build something great together. I'm always open to new
+              opportunities and collaborations.
             </p>
           </div>
 
@@ -65,7 +85,10 @@ export default function ContactPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Send Me a Message</CardTitle>
-                <CardDescription>Fill out the form below and I'll get back to you as soon as possible.</CardDescription>
+                <CardDescription>
+                  Fill out the form below and I'll get back to you as soon as
+                  possible.
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -116,7 +139,11 @@ export default function ContactPage() {
                       required
                     />
                   </div>
-                  <Button type="submit" className="w-full" disabled={isSubmitting}>
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={isSubmitting}
+                  >
                     {isSubmitting ? (
                       <>Sending...</>
                     ) : (
@@ -134,7 +161,9 @@ export default function ContactPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Connect With Me</CardTitle>
-                  <CardDescription>Find me on these platforms and social networks</CardDescription>
+                  <CardDescription>
+                    Find me on these platforms and social networks
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <SocialLink
@@ -170,7 +199,8 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent className="pt-6">
                   <p className="mb-4 text-sm text-muted-foreground">
-                    I'm available for freelance projects, speaking engagements, and technical consultations.
+                    I'm available for freelance projects, speaking engagements,
+                    and technical consultations.
                   </p>
                   <ul className="space-y-3">
                     <li className="flex items-start gap-2 text-sm">
@@ -203,9 +233,12 @@ export default function ContactPage() {
             <Card className="bg-muted/50">
               <CardContent className="flex flex-col items-center justify-between gap-4 px-6 py-8 text-center sm:flex-row sm:text-left">
                 <div>
-                  <h3 className="text-xl font-semibold">Looking for my resume?</h3>
+                  <h3 className="text-xl font-semibold">
+                    Looking for my resume?
+                  </h3>
                   <p className="text-muted-foreground">
-                    Check out my experience and qualifications to see if we're a good fit.
+                    Check out my experience and qualifications to see if we're a
+                    good fit.
                   </p>
                 </div>
                 <Button asChild>
@@ -217,14 +250,14 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 interface SocialLinkProps {
-  icon: React.ReactNode
-  platform: string
-  handle: string
-  href: string
+  icon: React.ReactNode;
+  platform: string;
+  handle: string;
+  href: string;
 }
 
 function SocialLink({ icon, platform, handle, href }: SocialLinkProps) {
@@ -235,11 +268,17 @@ function SocialLink({ icon, platform, handle, href }: SocialLinkProps) {
       rel="noopener noreferrer"
       className="flex items-center gap-3 rounded-md p-2 transition-colors hover:bg-muted"
     >
-      <div className={cn("flex h-10 w-10 items-center justify-center rounded-full bg-muted")}>{icon}</div>
+      <div
+        className={cn(
+          "flex h-10 w-10 items-center justify-center rounded-full bg-muted"
+        )}
+      >
+        {icon}
+      </div>
       <div>
         <div className="font-medium">{platform}</div>
         <div className="text-sm text-muted-foreground">{handle}</div>
       </div>
     </Link>
-  )
+  );
 }

@@ -1,16 +1,17 @@
-import Image from "next/image"
-import Link from "next/link"
-import { ArrowLeft, ExternalLink, Github, Play } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeft, ExternalLink, Github, Play } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // This is a mock project data - in a real app, you would fetch this from an API or CMS
 const projectData = {
   slug: "finance-tracker",
   title: "Finance Tracker Pro",
-  shortDescription: "A real-time financial tracking platform for businesses and individuals",
+  shortDescription:
+    "A real-time financial tracking platform for businesses and individuals",
   overview:
     "Finance Tracker Pro is a comprehensive financial management platform that helps businesses and individuals track expenses, manage budgets, and generate insights through advanced analytics. The application features real-time data processing, customizable dashboards, and integration with major banking APIs.",
   tags: ["NodeJS", "Kafka", "React", "MongoDB", "Docker", "AWS", "Serverless"],
@@ -64,7 +65,8 @@ const projectData = {
     },
     {
       metric: "30%",
-      description: "Average reduction in financial management time for businesses",
+      description:
+        "Average reduction in financial management time for businesses",
     },
     {
       metric: "$2.5M",
@@ -75,12 +77,14 @@ const projectData = {
     {
       title: "Dashboard",
       image: "/placeholder.svg?height=720&width=1280",
-      description: "The main dashboard showing financial overview and key metrics",
+      description:
+        "The main dashboard showing financial overview and key metrics",
     },
     {
       title: "Transaction Analysis",
       image: "/placeholder.svg?height=720&width=1280",
-      description: "Detailed transaction analysis with filtering and categorization",
+      description:
+        "Detailed transaction analysis with filtering and categorization",
     },
     {
       title: "Budget Planning",
@@ -94,14 +98,14 @@ const projectData = {
   teamSize: 6,
   duration: "8 months",
   role: "Lead Developer",
-}
+};
 
 export default function ProjectDetailPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <div className="bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4 py-12 md:px-6 md:py-20">
+        <div className="container mx-auto px-4 py-12 md:px-60 md:py-20">
           <div className="mb-6">
             <Button variant="ghost" size="sm" asChild className="mb-6">
               <Link href="/projects">
@@ -109,8 +113,12 @@ export default function ProjectDetailPage() {
                 Back to Projects
               </Link>
             </Button>
-            <h1 className="text-3xl font-bold tracking-tight md:text-5xl">{projectData.title}</h1>
-            <p className="mt-4 text-lg text-gray-600">{projectData.shortDescription}</p>
+            <h1 className="text-3xl font-bold tracking-tight md:text-5xl">
+              {projectData.title}
+            </h1>
+            <p className="mt-4 text-lg text-muted-foreground">
+              {projectData.shortDescription}
+            </p>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -124,7 +132,11 @@ export default function ProjectDetailPage() {
           <div className="mt-8 flex flex-wrap gap-4">
             {projectData.liveUrl && (
               <Button asChild>
-                <Link href={projectData.liveUrl} target="_blank" rel="noopener noreferrer">
+                <Link
+                  href={projectData.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <ExternalLink className="mr-2 h-4 w-4" />
                   View Live Project
                 </Link>
@@ -132,7 +144,11 @@ export default function ProjectDetailPage() {
             )}
             {projectData.githubUrl && (
               <Button variant="outline" asChild>
-                <Link href={projectData.githubUrl} target="_blank" rel="noopener noreferrer">
+                <Link
+                  href={projectData.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Github className="mr-2 h-4 w-4" />
                   View Source Code
                 </Link>
@@ -140,7 +156,11 @@ export default function ProjectDetailPage() {
             )}
             {projectData.demoVideo && (
               <Button variant="outline" asChild>
-                <Link href={projectData.demoVideo} target="_blank" rel="noopener noreferrer">
+                <Link
+                  href={projectData.demoVideo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Play className="mr-2 h-4 w-4" />
                   Watch Demo
                 </Link>
@@ -157,7 +177,7 @@ export default function ProjectDetailPage() {
             {/* Overview Section */}
             <section>
               <h2 className="mb-6 text-2xl font-bold">Project Overview</h2>
-              <div className="prose max-w-none text-gray-600">
+              <div className="prose max-w-none text-muted-foreground">
                 <p>{projectData.overview}</p>
               </div>
             </section>
@@ -165,16 +185,28 @@ export default function ProjectDetailPage() {
             {/* Screenshots/Demo Section */}
             <section>
               <h2 className="mb-6 text-2xl font-bold">Screenshots & Demo</h2>
-              <Tabs defaultValue={projectData.screenshots[0]?.title.toLowerCase().replace(/\s+/g, "-")}>
+              <Tabs
+                defaultValue={projectData.screenshots[0]?.title
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}
+              >
                 <TabsList className="mb-4">
                   {projectData.screenshots.map((screenshot) => (
-                    <TabsTrigger key={screenshot.title} value={screenshot.title.toLowerCase().replace(/\s+/g, "-")}>
+                    <TabsTrigger
+                      key={screenshot.title}
+                      value={screenshot.title
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}
+                    >
                       {screenshot.title}
                     </TabsTrigger>
                   ))}
                 </TabsList>
                 {projectData.screenshots.map((screenshot) => (
-                  <TabsContent key={screenshot.title} value={screenshot.title.toLowerCase().replace(/\s+/g, "-")}>
+                  <TabsContent
+                    key={screenshot.title}
+                    value={screenshot.title.toLowerCase().replace(/\s+/g, "-")}
+                  >
                     <div className="overflow-hidden rounded-lg border">
                       <Image
                         src={screenshot.image || "/placeholder.svg"}
@@ -184,7 +216,9 @@ export default function ProjectDetailPage() {
                         className="w-full object-cover"
                       />
                       <div className="bg-gray-50 p-4">
-                        <p className="text-sm text-gray-600">{screenshot.description}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {screenshot.description}
+                        </p>
                       </div>
                     </div>
                   </TabsContent>
@@ -194,7 +228,9 @@ export default function ProjectDetailPage() {
 
             {/* Challenges & Solutions Section */}
             <section>
-              <h2 className="mb-6 text-2xl font-bold">Challenges & Solutions</h2>
+              <h2 className="mb-6 text-2xl font-bold">
+                Challenges & Solutions
+              </h2>
               <div className="grid gap-6 md:grid-cols-2">
                 <div>
                   <h3 className="mb-4 text-xl font-semibold">Challenges</h3>
@@ -202,8 +238,12 @@ export default function ProjectDetailPage() {
                     {projectData.challenges.map((challenge, index) => (
                       <Card key={index}>
                         <CardContent className="p-4">
-                          <h4 className="mb-2 font-medium">{challenge.title}</h4>
-                          <p className="text-sm text-gray-600">{challenge.description}</p>
+                          <h4 className="mb-2 font-medium">
+                            {challenge.title}
+                          </h4>
+                          <p className="text-sm text-muted-foreground">
+                            {challenge.description}
+                          </p>
                         </CardContent>
                       </Card>
                     ))}
@@ -216,7 +256,9 @@ export default function ProjectDetailPage() {
                       <Card key={index}>
                         <CardContent className="p-4">
                           <h4 className="mb-2 font-medium">{solution.title}</h4>
-                          <p className="text-sm text-gray-600">{solution.description}</p>
+                          <p className="text-sm text-muted-foreground">
+                            {solution.description}
+                          </p>
                         </CardContent>
                       </Card>
                     ))}
@@ -233,19 +275,29 @@ export default function ProjectDetailPage() {
                 <h3 className="mb-4 text-xl font-semibold">Project Details</h3>
                 <dl className="space-y-4">
                   <div>
-                    <dt className="text-sm font-medium text-gray-500">My Role</dt>
+                    <dt className="text-sm font-medium text-gray-500">
+                      My Role
+                    </dt>
                     <dd className="text-gray-900">{projectData.role}</dd>
                   </div>
                   <div>
-                    <dt className="text-sm font-medium text-gray-500">Team Size</dt>
-                    <dd className="text-gray-900">{projectData.teamSize} people</dd>
+                    <dt className="text-sm font-medium text-gray-500">
+                      Team Size
+                    </dt>
+                    <dd className="text-gray-900">
+                      {projectData.teamSize} people
+                    </dd>
                   </div>
                   <div>
-                    <dt className="text-sm font-medium text-gray-500">Duration</dt>
+                    <dt className="text-sm font-medium text-gray-500">
+                      Duration
+                    </dt>
                     <dd className="text-gray-900">{projectData.duration}</dd>
                   </div>
                   <div>
-                    <dt className="text-sm font-medium text-gray-500">Tech Stack</dt>
+                    <dt className="text-sm font-medium text-gray-500">
+                      Tech Stack
+                    </dt>
                     <dd className="mt-1 flex flex-wrap gap-1">
                       {projectData.tags.map((tag) => (
                         <Badge key={tag} variant="outline" className="text-xs">
@@ -265,8 +317,12 @@ export default function ProjectDetailPage() {
                 <div className="grid grid-cols-2 gap-4">
                   {projectData.outcomes.map((outcome, index) => (
                     <div key={index} className="text-center">
-                      <div className="text-2xl font-bold text-primary">{outcome.metric}</div>
-                      <div className="text-sm text-gray-600">{outcome.description}</div>
+                      <div className="text-2xl font-bold text-primary">
+                        {outcome.metric}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {outcome.description}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -276,14 +332,21 @@ export default function ProjectDetailPage() {
             {/* Call to Action */}
             <Card className="bg-primary text-primary-foreground">
               <CardContent className="p-6">
-                <h3 className="mb-4 text-xl font-semibold">Interested in this project?</h3>
+                <h3 className="mb-4 text-xl font-semibold">
+                  Interested in this project?
+                </h3>
                 <p className="mb-4 text-sm opacity-90">
-                  Check out the live version or explore the source code to learn more about how it was built.
+                  Check out the live version or explore the source code to learn
+                  more about how it was built.
                 </p>
                 <div className="flex flex-col gap-2">
                   {projectData.liveUrl && (
                     <Button variant="secondary" asChild className="w-full">
-                      <Link href={projectData.liveUrl} target="_blank" rel="noopener noreferrer">
+                      <Link
+                        href={projectData.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <ExternalLink className="mr-2 h-4 w-4" />
                         View Live Project
                       </Link>
@@ -295,7 +358,11 @@ export default function ProjectDetailPage() {
                       asChild
                       className="w-full border-primary-foreground/20 hover:bg-primary-foreground/10"
                     >
-                      <Link href={projectData.githubUrl} target="_blank" rel="noopener noreferrer">
+                      <Link
+                        href={projectData.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <Github className="mr-2 h-4 w-4" />
                         View Source Code
                       </Link>
@@ -308,5 +375,5 @@ export default function ProjectDetailPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

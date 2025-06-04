@@ -4,48 +4,81 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
+    /* Deep Glossy Brown Light Theme */
+    --background: 30 20% 98%; /* #f8f5f2 */
+    --foreground: 24 32% 18%; /* #3b2a1a */
+    --card: 30 20% 98%; /* #f8f5f2 */
+    --card-foreground: 24 32% 18%; /* #3b2a1a */
+    --popover: 30 20% 98%; /* #f8f5f2 */
+    --popover-foreground: 24 32% 18%; /* #3b2a1a */
+    --primary: 24 60% 30%; /* #6b3f1d */
+    --primary-foreground: 30 20% 98%; /* #f8f5f2 */
+    --secondary: 30 24% 90%; /* #ece3db */
+    --secondary-foreground: 24 32% 18%; /* #3b2a1a */
+    --muted: 30 24% 90%; /* #ece3db */
+    --muted-foreground: 24 16% 50%; /* #8c735e */
+    --accent: 24 60% 40%; /* #8c5a2b */
+    --accent-foreground: 30 20% 98%; /* #f8f5f2 */
+    --destructive: 0 80% 60%; /* #e57373 */
+    --destructive-foreground: 30 20% 98%; /* #f8f5f2 */
+    --border: 30 24% 90%; /* #ece3db */
+    --input: 30 24% 90%; /* #ece3db */
+    --ring: 24 60% 30%; /* #6b3f1d */
+
+    --chart-1: 24 60% 30%; /* #6b3f1d */
+    --chart-2: 24 60% 40%; /* #8c5a2b */
+    --chart-3: 24 32% 18%; /* #3b2a1a */
+    --chart-4: 30 24% 90%; /* #ece3db */
+    --chart-5: 0 80% 60%; /* #e57373 */
+
     --radius: 0.5rem;
+
+    --sidebar-background: 30 24% 90%; /* #ece3db */
+    --sidebar-foreground: 24 32% 18%; /* #3b2a1a */
+    --sidebar-primary: 24 60% 30%; /* #6b3f1d */
+    --sidebar-primary-foreground: 30 20% 98%; /* #f8f5f2 */
+    --sidebar-accent: 24 60% 40%; /* #8c5a2b */
+    --sidebar-accent-foreground: 30 20% 98%; /* #f8f5f2 */
+    --sidebar-border: 30 24% 90%; /* #ece3db */
+    --sidebar-ring: 24 60% 30%; /* #6b3f1d */
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    /* Deep Glossy Brown Dark Theme */
+    --background: 24 32% 12%; /* #24180f */
+    --foreground: 30 20% 98%; /* #f8f5f2 */
+    --card: 24 32% 14%; /* #2a1c12 */
+    --card-foreground: 30 20% 98%; /* #f8f5f2 */
+    --popover: 24 32% 14%; /* #2a1c12 */
+    --popover-foreground: 30 20% 98%; /* #f8f5f2 */
+    --primary: 24 60% 30%; /* #6b3f1d */
+    --primary-foreground: 30 20% 98%; /* #f8f5f2 */
+    --secondary: 24 32% 18%; /* #3b2a1a */
+    --secondary-foreground: 30 20% 98%; /* #f8f5f2 */
+    --muted: 24 32% 18%; /* #3b2a1a */
+    --muted-foreground: 30 20% 70%; /* #cbbba9 */
+    --accent: 24 60% 40%; /* #8c5a2b */
+    --accent-foreground: 30 20% 98%; /* #f8f5f2 */
+    --destructive: 0 80% 60%; /* #e57373 */
+    --destructive-foreground: 30 20% 98%; /* #f8f5f2 */
+    --border: 24 32% 18%; /* #3b2a1a */
+    --input: 24 32% 18%; /* #3b2a1a */
+    --ring: 24 60% 40%; /* #8c5a2b */
+
+    --chart-1: 24 60% 30%; /* #6b3f1d */
+    --chart-2: 24 60% 40%; /* #8c5a2b */
+    --chart-3: 30 20% 98%; /* #f8f5f2 */
+    --chart-4: 24 32% 18%; /* #3b2a1a */
+    --chart-5: 0 80% 60%; /* #e57373 */
+
+    --sidebar-background: 24 32% 14%; /* #2a1c12 */
+    --sidebar-foreground: 30 20% 98%; /* #f8f5f2 */
+    --sidebar-primary: 24 60% 30%; /* #6b3f1d */
+    --sidebar-primary-foreground: 30 20% 98%; /* #f8f5f2 */
+    --sidebar-accent: 24 60% 40%; /* #8c5a2b */
+    --sidebar-accent-foreground: 30 20% 98%; /* #f8f5f2 */
+    --sidebar-border: 24 32% 18%; /* #3b2a1a */
+    --sidebar-ring: 24 60% 40%; /* #8c5a2b */
   }
 }
 
@@ -56,17 +89,6 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-
-/* Code background animation */
-.code-background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(rgba(18, 30, 102, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(18, 30, 102, 0.07) 1px, transparent 1px);
-  background-size: 20px 20px;
-  animation: moveBackground 15s linear infinite;
 }
 
 @keyframes moveBackground {
@@ -108,4 +130,49 @@
 
 .code-card code .function {
   color: #6f42c1;
+}
+
+/* wysimark editor */
+
+/* wrapper */
+.editor-wrapper > :nth-child(1) {
+  border: none !important;
+  @apply overflow-visible;
+}
+.editor-wrapper > :nth-child(1):focus,
+.editor-wrapper > :nth-child(1):focus-visible,
+.editor-wrapper > :nth-child(1):focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* toolbar */
+.editor-wrapper > :nth-child(1) > :nth-child(1) {
+  border: none !important;
+  @apply rounded-md bg-muted flex !items-center !justify-start;
+}
+.editor-wrapper > :nth-child(1) > :nth-child(1) > :nth-child(1) {
+  @apply space-x-1;
+}
+
+/* hide tool bar when read-only */
+.editor-wrapper > :nth-child(1) > :nth-child(1):has(+ .read-only) {
+  @apply hidden;
+}
+
+/* toolbar buttons */
+.editor-wrapper
+  > :nth-child(1)
+  > :nth-child(1)
+  > :nth-child(1)
+  > [data-item-type="button"] {
+  @apply rounded-md bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground;
+}
+
+/* editor */
+.editor-wrapper > :nth-child(1) > :nth-child(2) {
+  @apply !border-none !border-0 placeholder:text-muted-foreground placeholder:italic text-foreground !py-3 !px-3;
+}
+.editor-wrapper > :nth-child(1) > :nth-child(2).read-only {
+  @apply !p-0 cursor-default;
 }

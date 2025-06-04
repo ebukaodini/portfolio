@@ -1,30 +1,21 @@
-import Image from "next/image"
-import { Badge } from "@/components/ui/badge"
-import { formatDate } from "@/lib/utils"
-import { CalendarIcon, Clock } from "lucide-react"
-import ReactMarkdown from "react-markdown"
-
-interface BlogPost {
-  title: string
-  excerpt: string
-  content: string
-  publishedAt: string
-  category: string
-  tags: string[]
-  coverImage: string
-}
+import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
+import { formatDate } from "@/utils/date";
+import { CalendarIcon, Clock } from "lucide-react";
+import Editor from "./editor";
+import { BlogPost } from "@/interfaces/blog-post";
 
 interface BlogPostPreviewProps {
-  post: BlogPost
+  post: BlogPost;
 }
 
 export function BlogPostPreview({ post }: BlogPostPreviewProps) {
   // Use current date if publishedAt is empty
-  const publishDate = post.publishedAt || new Date().toISOString()
+  const publishDate = post.publishedAt || new Date().toISOString();
 
   // Estimate reading time (1 minute per 200 words)
-  const wordCount = post.content.split(/\s+/).length
-  const readingTime = Math.max(1, Math.ceil(wordCount / 200))
+  const wordCount = post.content.split(/\s+/).length;
+  const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -40,10 +31,12 @@ export function BlogPostPreview({ post }: BlogPostPreviewProps) {
         </span>
       </div>
 
-      <h1 className="mb-6 text-3xl font-bold tracking-tight md:text-4xl">{post.title || "Untitled Post"}</h1>
+      <h1 className="mb-6 text-3xl font-bold tracking-tight md:text-4xl">
+        {post.title || "Untitled Post"}
+      </h1>
 
       {post.coverImage && (
-        <div className="relative mb-8 aspect-video w-full overflow-hidden rounded-lg">
+        <div className="relative mb-4 aspect-video w-full overflow-hidden rounded-lg">
           <Image
             src={post.coverImage || "/placeholder.svg"}
             alt={post.title}
@@ -55,7 +48,11 @@ export function BlogPostPreview({ post }: BlogPostPreviewProps) {
       )}
 
       <div className="prose max-w-none dark:prose-invert">
-        <ReactMarkdown>{post.content || "*No content yet*"}</ReactMarkdown>
+        <Editor
+          markdown={post.content}
+          placeholder="No content yet..."
+          readonly={true}
+        />
       </div>
 
       {post.tags.length > 0 && (
@@ -68,5 +65,5 @@ export function BlogPostPreview({ post }: BlogPostPreviewProps) {
         </div>
       )}
     </div>
-  )
+  );
 }

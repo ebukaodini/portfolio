@@ -1,13 +1,25 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { formatDate } from "@/lib/utils"
-import { Edit, MoreHorizontal, Trash } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { formatDate } from "@/utils/cn";
+import { Edit, MoreHorizontal, Trash } from "lucide-react";
 
 // Mock data for blog posts
 const blogPosts = [
@@ -23,7 +35,8 @@ const blogPosts = [
   {
     id: "2",
     title: "Advanced React Performance Optimization Techniques",
-    excerpt: "Explore advanced techniques to optimize React applications for better performance and user experience.",
+    excerpt:
+      "Explore advanced techniques to optimize React applications for better performance and user experience.",
     publishedAt: "2023-03-22T10:30:00Z",
     category: "Engineering Notes",
     status: "published",
@@ -31,7 +44,8 @@ const blogPosts = [
   {
     id: "3",
     title: "Design Patterns in TypeScript: A Practical Guide",
-    excerpt: "A comprehensive guide to implementing common design patterns in TypeScript with real-world examples.",
+    excerpt:
+      "A comprehensive guide to implementing common design patterns in TypeScript with real-world examples.",
     publishedAt: "2023-02-18T08:45:00Z",
     category: "Engineering Notes",
     status: "published",
@@ -54,14 +68,14 @@ const blogPosts = [
     category: "R&D Experiments",
     status: "published",
   },
-]
+];
 
 export function BlogPostList() {
-  const [posts, setPosts] = useState(blogPosts)
+  const [posts, setPosts] = useState(blogPosts);
 
   const handleDelete = (id: string) => {
-    setPosts(posts.filter((post) => post.id !== id))
-  }
+    setPosts(posts.filter((post) => post.id !== id));
+  };
 
   return (
     <div className="rounded-md border">
@@ -86,10 +100,18 @@ export function BlogPostList() {
                   </span>
                 </div>
               </TableCell>
-              <TableCell className="hidden md:table-cell">{post.category}</TableCell>
-              <TableCell className="hidden md:table-cell">{formatDate(post.publishedAt)}</TableCell>
+              <TableCell className="hidden md:table-cell">
+                {post.category}
+              </TableCell>
+              <TableCell className="hidden md:table-cell">
+                {formatDate(post.publishedAt)}
+              </TableCell>
               <TableCell>
-                <Badge variant={post.status === "published" ? "default" : "secondary"}>
+                <Badge
+                  variant={
+                    post.status === "published" ? "default" : "secondary"
+                  }
+                >
                   {post.status === "published" ? "Published" : "Draft"}
                 </Badge>
               </TableCell>
@@ -108,7 +130,10 @@ export function BlogPostList() {
                         Edit
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="text-destructive" onClick={() => handleDelete(post.id)}>
+                    <DropdownMenuItem
+                      className="text-destructive"
+                      onClick={() => handleDelete(post.id)}
+                    >
                       <Trash className="mr-2 h-4 w-4" />
                       Delete
                     </DropdownMenuItem>
@@ -120,5 +145,5 @@ export function BlogPostList() {
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }
