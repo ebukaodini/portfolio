@@ -20,7 +20,7 @@ jobs:
 
       - name: Build site
         env:
-          NEXT_PUBLIC_GITHUB_CONFIG_TOKEN: ${{ secrets.GITHUB_CONFIG_TOKEN }}
+          NEXT_PUBLIC_GITHUB_CONFIG_TOKEN: ${{ secrets.GH_TOKEN }}
           NEXT_PUBLIC_WYSIMARK_AUTH_TOKEN: ${{ secrets.WYSIMARK_AUTH_TOKEN }}
         run: |
           # Your build process here
@@ -29,5 +29,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./.next
