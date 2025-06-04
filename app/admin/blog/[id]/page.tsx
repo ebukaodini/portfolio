@@ -1,5 +1,11 @@
 import { BlogPostForm } from "@/components/admin/blog-post-form";
 
+export async function generateStaticParams() {
+  // For admin pages, you typically want to include common routes
+  // In a real app, you might fetch actual blog post IDs from your API/database
+  return [{ id: "new" }];
+}
+
 export default function EditBlogPostPage({
   params,
 }: {
