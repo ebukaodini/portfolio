@@ -1,11 +1,32 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Plus, Search } from "lucide-react"
-import { BlogPostList } from "@/components/admin/blog-post-list"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Plus, Search } from "lucide-react";
+import { BlogPostList } from "@/components/admin/blog-post-list";
+import { getAllBlogPosts } from "@/model/blog";
+import { BlogPost } from "@/interfaces/blog-post";
 
-export default function BlogPostsPage() {
+export default async function BlogPostsPage() {
+  let posts: BlogPost[] = [];
+  let publishedPosts: number = 0;
+  let draftPosts: number = 0;
+
+  try {
+    posts = await getAllBlogPosts();
+    publishedPosts = posts.filter((blog) => blog.status === "published").length;
+    draftPosts = posts.filter((blog) => blog.status === "draft").length;
+  } catch (error) {
+    // If we're on the client side, this will throw
+    console.error("Cannot fetch blog posts on client side:", error);
+  }
+
   return (
     <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
       <div className="flex items-center justify-between">
@@ -21,7 +42,20 @@ export default function BlogPostsPage() {
         <Card>
           <CardHeader className="pb-3">
             <CardTitle>Manage Posts</CardTitle>
-            <CardDescription>You have 12 published blog posts and 3 drafts.</CardDescription>
+            <CardDescription>
+              You have {publishedPosts}
+              {publishedPosts > 0
+                ? publishedPosts > 1
+                  ? " published blog posts "
+                  : " published blog post "
+                : " no blog posts "}
+              and {draftPosts}
+              {draftPosts > 0
+                ? draftPosts > 1
+                  ? " drafts. "
+                  : " draft. "
+                : " no drafts. "}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">
@@ -39,5 +73,5 @@ export default function BlogPostsPage() {
         <BlogPostList />
       </div>
     </div>
-  )
+  );
 }

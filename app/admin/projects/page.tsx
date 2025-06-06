@@ -1,11 +1,28 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Plus, Search } from "lucide-react"
-import { ProjectList } from "@/components/admin/project-list"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Plus, Search } from "lucide-react";
+import { ProjectList } from "@/components/admin/project-list";
+import { Project } from "@/interfaces/project";
+import { getAllProjects } from "@/model/project";
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  let projects: Project[] = [];
+
+  try {
+    projects = await getAllProjects();
+  } catch (error) {
+    // If we're on the client side, this will throw
+    console.error("Cannot fetch blog projects on client side:", error);
+  }
+
   return (
     <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
       <div className="flex items-center justify-between">
@@ -21,7 +38,9 @@ export default function ProjectsPage() {
         <Card>
           <CardHeader className="pb-3">
             <CardTitle>Manage Projects</CardTitle>
-            <CardDescription>You have 8 projects in your portfolio.</CardDescription>
+            <CardDescription>
+              You have {projects.length} projects in your portfolio.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">
@@ -39,5 +58,5 @@ export default function ProjectsPage() {
         <ProjectList />
       </div>
     </div>
-  )
+  );
 }
