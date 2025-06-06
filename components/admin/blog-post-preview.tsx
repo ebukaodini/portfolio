@@ -4,6 +4,7 @@ import { formatDate } from "@/utils/date";
 import { CalendarIcon, Clock } from "lucide-react";
 import Editor from "./editor";
 import { BlogPost } from "@/interfaces/blog-post";
+import { readingTime } from "@/utils/reading-time";
 
 interface BlogPostPreviewProps {
   post: BlogPost;
@@ -12,10 +13,6 @@ interface BlogPostPreviewProps {
 export function BlogPostPreview({ post }: BlogPostPreviewProps) {
   // Use current date if publishedAt is empty
   const publishDate = post.publishedAt || new Date().toISOString();
-
-  // Estimate reading time (1 minute per 200 words)
-  const wordCount = post.content.split(/\s+/).length;
-  const readingTime = Math.max(1, Math.ceil(wordCount / 200));
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -27,7 +24,7 @@ export function BlogPostPreview({ post }: BlogPostPreviewProps) {
         </span>
         <span className="text-sm text-muted-foreground">
           <Clock className="mr-1 inline-block h-3 w-3" />
-          {readingTime} min read
+          {readingTime(post.content)}
         </span>
       </div>
 
@@ -36,7 +33,7 @@ export function BlogPostPreview({ post }: BlogPostPreviewProps) {
       </h1>
 
       {post.coverImage && (
-        <div className="relative mb-4 aspect-video w-full overflow-hidden rounded-lg">
+        <div className="relative mb-8 aspect-auto w-full overflow-hidden rounded-lg">
           <Image
             src={post.coverImage || "/placeholder.svg"}
             alt={post.title}

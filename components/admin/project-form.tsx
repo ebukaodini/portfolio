@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,37 +11,12 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-// import { TagInput } from "@/components/admin/tag-input"
+import TagInput from "@/components/admin/tag-input";
 import { ProjectPreview } from "@/components/admin/project-preview";
 import { useToast } from "@/hooks/use-toast";
 import { Eye, Plus, Save, Trash } from "lucide-react";
-
-interface Screenshot {
-  title: string;
-  image: string;
-  description: string;
-}
-
-interface ProjectDetails {
-  challenge: string;
-  solution: string;
-  impact: string;
-  features: string[];
-}
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  image: string;
-  demoUrl: string;
-  githubUrl: string;
-  featured: boolean;
-  techStack: string[];
-  screenshots: Screenshot[];
-  details: ProjectDetails;
-}
+import { Project, Screenshots } from "@/interfaces/project";
+import { useFormAutoSave } from "@/hooks/use-autosave";
 
 interface ProjectFormProps {
   initialData: Project;
@@ -52,6 +27,17 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
   const { toast } = useToast();
   const [formData, setFormData] = useState<Project>(initialData);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    setFormData(initialData);
+  }, [initialData]);
+
+  // Use the auto-save hook
+  const { clearSavedData } = useFormAutoSave(
+    formData,
+    setFormData,
+    "blog-post"
+  );
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -91,7 +77,7 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
 
   const handleScreenshotChange = (
     index: number,
-    field: keyof Screenshot,
+    field: keyof Screenshots,
     value: string
   ) => {
     const updatedScreenshots = [...formData.screenshots];
@@ -105,10 +91,7 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
   const addScreenshot = () => {
     setFormData((prev) => ({
       ...prev,
-      screenshots: [
-        ...prev.screenshots,
-        { title: "", image: "", description: "" },
-      ],
+      screenshots: [...prev.screenshots, { image: "", description: "" }],
     }));
   };
 
@@ -129,7 +112,7 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
       toast({
         title: "Success",
         description: `Project ${
-          initialData.id ? "updated" : "created"
+          initialData.slug ? "updated" : "created"
         } successfully.`,
       });
 
@@ -242,18 +225,19 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
 
                   <div className="space-y-2">
                     <Label>Tags</Label>
-                    {/* <TagInput tags={formData.tags} setTags={handleTagsChange} /> */}
-                    <p className="text-xs text-muted-foreground">
-                      Press enter or comma to add a tag
-                    </p>
+                    <TagInput
+                      tags={formData.tags!}
+                      setTags={handleTagsChange}
+                    />
                   </div>
 
                   <div className="space-y-2">
                     <Label>Tech Stack</Label>
-                    {/* <TagInput tags={formData.techStack} setTags={handleTechStackChange} /> */}
-                    <p className="text-xs text-muted-foreground">
-                      Add the technologies used in this project
-                    </p>
+                    <TagInput
+                      tags={formData.techStack!}
+                      setTags={handleTechStackChange}
+                      placeholder="Press comma to add technologies used in this project"
+                    />
                   </div>
                 </div>
               </CardContent>
@@ -268,7 +252,7 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
                     <Textarea
                       id="challenge"
                       name="challenge"
-                      value={formData.details.challenge}
+                      value={formData.details?.challenge}
                       onChange={handleDetailsChange}
                       placeholder="What problem did this project solve?"
                       rows={3}
@@ -280,7 +264,7 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
                     <Textarea
                       id="solution"
                       name="solution"
-                      value={formData.details.solution}
+                      value={formData.details?.solution}
                       onChange={handleDetailsChange}
                       placeholder="How did you solve the problem?"
                       rows={3}
@@ -292,7 +276,7 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
                     <Input
                       id="impact"
                       name="impact"
-                      value={formData.details.impact}
+                      value={formData.details?.impact}
                       onChange={handleDetailsChange}
                       placeholder="What was the outcome or impact?"
                     />
@@ -300,10 +284,11 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
 
                   <div className="space-y-2">
                     <Label>Key Features</Label>
-                    {/* <TagInput tags={formData.details.features} setTags={handleFeaturesChange} /> */}
-                    <p className="text-xs text-muted-foreground">
-                      Add the key features of this project
-                    </p>
+                    <TagInput
+                      tags={formData.details?.features!}
+                      setTags={handleFeaturesChange}
+                      placeholder="Press comma to add the key features of this project"
+                    />
                   </div>
                 </div>
               </CardContent>
@@ -324,7 +309,7 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
                   </Button>
                 </div>
                 <div className="mt-4 space-y-6">
-                  {formData.screenshots.map((screenshot, index) => (
+                  {formData.screenshots?.map((screenshot, index) => (
                     <div
                       key={index}
                       className="relative space-y-4 rounded-md border p-4"
@@ -341,29 +326,12 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
                       </Button>
                       <div className="grid gap-4 md:grid-cols-2">
                         <div className="space-y-2">
-                          <Label htmlFor={`screenshot-title-${index}`}>
-                            Title
-                          </Label>
-                          <Input
-                            id={`screenshot-title-${index}`}
-                            value={screenshot.title}
-                            onChange={(e) =>
-                              handleScreenshotChange(
-                                index,
-                                "title",
-                                e.target.value
-                              )
-                            }
-                            placeholder="Screenshot title"
-                          />
-                        </div>
-                        <div className="space-y-2">
                           <Label htmlFor={`screenshot-image-${index}`}>
                             Image URL
                           </Label>
                           <Input
                             id={`screenshot-image-${index}`}
-                            value={screenshot.image}
+                            value={screenshot?.image}
                             onChange={(e) =>
                               handleScreenshotChange(
                                 index,
@@ -381,7 +349,7 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
                         </Label>
                         <Input
                           id={`screenshot-description-${index}`}
-                          value={screenshot.description}
+                          value={screenshot?.description}
                           onChange={(e) =>
                             handleScreenshotChange(
                               index,
@@ -394,7 +362,7 @@ export function ProjectForm({ initialData }: ProjectFormProps) {
                       </div>
                     </div>
                   ))}
-                  {formData.screenshots.length === 0 && (
+                  {formData.screenshots?.length === 0 && (
                     <div className="flex h-24 items-center justify-center rounded-md border border-dashed">
                       <p className="text-sm text-muted-foreground">
                         No screenshots added yet

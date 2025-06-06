@@ -6,9 +6,10 @@ import { Input } from "../ui/input";
 interface TagInputProps {
   tags: string[];
   setTags: (value: string[]) => void;
+  placeholder?: string;
 }
 
-const TagInput: React.FC<TagInputProps> = ({ tags, setTags }) => {
+const TagInput: React.FC<TagInputProps> = ({ tags, setTags, placeholder }) => {
   const [input, setInput] = useState("");
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -28,7 +29,7 @@ const TagInput: React.FC<TagInputProps> = ({ tags, setTags }) => {
 
   return (
     <div className="flex flex-wrap items-center gap-2 ">
-      {tags.map((tag, index) => (
+      {tags?.map((tag, index) => (
         <Badge
           key={index}
           variant="secondary"
@@ -39,7 +40,8 @@ const TagInput: React.FC<TagInputProps> = ({ tags, setTags }) => {
             variant={"ghost"}
             size={"xs"}
             onClick={() => removeTag(index)}
-            className="ml-2 p-1 !hover:bg-transparent hover:text-destructive-foreground focus:outline-none"
+            title="Remove tag"
+            className="ml-2 p-1 hover:bg-transparent hover:text-destructive focus:outline-none"
           >
             &times;
           </Button>
@@ -51,8 +53,7 @@ const TagInput: React.FC<TagInputProps> = ({ tags, setTags }) => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="Press comma to add a tag"
-        className="border-none focus:outline-none focus:ring-0"
+        placeholder={placeholder ?? "Press comma to add a tag"}
       />
     </div>
   );

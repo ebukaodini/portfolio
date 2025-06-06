@@ -2,7 +2,7 @@
 
 import type React from "react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import { TagInput } from "@/components/admin/tag-input";
+import TagInput from "@/components/admin/tag-input";
 import { BlogPostPreview } from "@/components/admin/blog-post-preview";
 import { useToast } from "@/hooks/use-toast";
 import { Edit, Eye } from "lucide-react";
@@ -26,8 +26,7 @@ import { useFormAutoSave } from "@/hooks/use-autosave";
 import { useGitHub } from "@/hooks/use-github";
 import { BlogPost } from "@/interfaces/blog-post";
 import { slugify } from "@/utils/slugify";
-import { generateShortId } from "@/utils/short-id";
-import TagInput from "./tag-input";
+import { updateBlogPost } from "@/model/blog";
 
 interface BlogPostFormProps {
   initialData: BlogPost;
@@ -38,7 +37,11 @@ export function BlogPostForm({ initialData }: BlogPostFormProps) {
   const { toast } = useToast();
   const [formData, setFormData] = useState<BlogPost>(initialData);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { saveToGitHub } = useGitHub();
+  // const { saveToGitHub } = useGitHub();
+
+  useEffect(() => {
+    setFormData(initialData);
+  }, [initialData]);
 
   // Use the auto-save hook
   const { clearSavedData } = useFormAutoSave(
@@ -61,34 +64,28 @@ export function BlogPostForm({ initialData }: BlogPostFormProps) {
     setIsSubmitting(true);
 
     try {
-      // In a real application, you would send the data to your API
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      const { filename, path } = await saveToGitHub(formData.content, {
-        id: initialData.id || generateShortId(),
+      // const { filename, path } = await saveToGitHub(formData.content, post)
+      let success = "Action successful";
+      const post = {
+        ...formData,
         slug: formData.slug || slugify(formData.title),
-        title: formData.title,
-        excerpt: formData.excerpt,
-        category: formData.category,
-        tags: formData.tags || [],
-        coverImage: formData.coverImage,
-        status: formData.status,
-        createdAt: initialData.createdAt || new Date().toISOString(),
+        createdAt: new Date().toISOString(),
         publishedAt:
-          formData.status === "published"
-            ? formData.publishedAt || new Date().toISOString()
-            : null,
-        featured: formData.featured || false,
-      } as BlogPost);
+          formData.status === "published" ? new Date().toISOString() : null,
+      } as BlogPost;
+      if (initialData.slug) {
+        success = await updateBlogPost(post);
+      } else {
+        success = await updateBlogPost(post);
+      }
 
       // Clear saved data after successful submission
       clearSavedData();
 
       toast({
         title: "Success",
-        description: `Blog post ${
-          initialData.id ? "updated" : "created"
-        } successfully. File: ${filename}. Path: ${path}`,
+        description: success,
+        variant: "success",
       });
 
       // Redirect to the blog posts list

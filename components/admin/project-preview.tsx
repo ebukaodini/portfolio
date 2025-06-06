@@ -5,31 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ExternalLink, Github } from "lucide-react";
-
-interface Screenshot {
-  title: string;
-  image: string;
-  description: string;
-}
-
-interface ProjectDetails {
-  challenge: string;
-  solution: string;
-  impact: string;
-  features: string[];
-}
-
-interface Project {
-  title: string;
-  description: string;
-  tags: string[];
-  image: string;
-  demoUrl: string;
-  githubUrl: string;
-  techStack: string[];
-  screenshots: Screenshot[];
-  details: ProjectDetails;
-}
+import { Project } from "@/interfaces/project";
 
 interface ProjectPreviewProps {
   project: Project;
@@ -108,40 +84,20 @@ export function ProjectPreview({ project }: ProjectPreviewProps) {
           {project.screenshots.length > 0 && (
             <section>
               <h2 className="mb-6 text-2xl font-bold">Screenshots & Demo</h2>
-              <Tabs
-                defaultValue={
-                  project.screenshots[0]?.title
-                    .toLowerCase()
-                    .replace(/\s+/g, "-") || "screenshot-1"
-                }
-              >
+              <Tabs defaultValue={"screenshot-1"}>
                 <TabsList className="mb-4">
                   {project.screenshots.map((screenshot, index) => (
-                    <TabsTrigger
-                      key={index}
-                      value={
-                        screenshot.title
-                          ? screenshot.title.toLowerCase().replace(/\s+/g, "-")
-                          : `screenshot-${index + 1}`
-                      }
-                    >
-                      {screenshot.title || `Screenshot ${index + 1}`}
+                    <TabsTrigger key={index} value={`screenshot-${index + 1}`}>
+                      Screenshot ${index + 1}
                     </TabsTrigger>
                   ))}
                 </TabsList>
                 {project.screenshots.map((screenshot, index) => (
-                  <TabsContent
-                    key={index}
-                    value={
-                      screenshot.title
-                        ? screenshot.title.toLowerCase().replace(/\s+/g, "-")
-                        : `screenshot-${index + 1}`
-                    }
-                  >
+                  <TabsContent key={index} value={`screenshot-${index + 1}`}>
                     <div className="overflow-hidden rounded-lg border">
                       <Image
                         src={screenshot.image || "/placeholder.svg"}
-                        alt={screenshot.title || `Screenshot ${index + 1}`}
+                        alt={`Screenshot ${index + 1}`}
                         width={1280}
                         height={720}
                         className="w-full object-cover"
@@ -214,33 +170,6 @@ export function ProjectPreview({ project }: ProjectPreviewProps) {
                     </dd>
                   </div>
                 )}
-                {project.details.impact && (
-                  <div>
-                    <dt className="text-sm font-medium text-muted-foreground">
-                      Impact
-                    </dt>
-                    <dd className="mt-1">
-                      <p className="text-sm text-muted-foreground">
-                        {project.details.impact}
-                      </p>
-                    </dd>
-                  </div>
-                )}
-                {project.details.features &&
-                  project.details.features.length > 0 && (
-                    <div>
-                      <dt className="text-sm font-medium text-muted-foreground">
-                        Key Features
-                      </dt>
-                      <dd className="mt-1">
-                        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
-                          {project.details.features.map((feature, index) => (
-                            <li key={index}>{feature}</li>
-                          ))}
-                        </ul>
-                      </dd>
-                    </div>
-                  )}
                 {project.details.impact && (
                   <div>
                     <dt className="text-sm font-medium text-muted-foreground">
