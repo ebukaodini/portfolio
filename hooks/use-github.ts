@@ -68,7 +68,6 @@ export const useGitHub = () => {
   });
 
   const saveToGitHub = async (
-    // filename: string,
     content: string,
     frontMatter: Record<string, any>
   ) => {
@@ -78,7 +77,7 @@ export const useGitHub = () => {
     try {
       const client = new GitHubClient(config);
       const mdxContent = createMDXContent(frontMatter, content);
-      const filename = `${frontMatter.slug}-${frontMatter.id}`;
+      const filename = frontMatter.slug;
       const path = `data/posts/${filename}.mdx`;
 
       // Check if file exists
