@@ -10,24 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
-interface ProjectCardProps {
-  slug: string;
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  url?: string;
-  githubUrl?: string;
-  details?: {
-    challenge?: string;
-    solution?: string;
-    impact?: string;
-    features?: string[];
-    stack?: string[];
-    screenshots?: string[];
-  };
-}
+import { Project } from "@/interfaces/project";
 
 export function ProjectCard({
   slug,
@@ -35,10 +18,10 @@ export function ProjectCard({
   description,
   image,
   tags,
-  url,
+  demoUrl,
   githubUrl,
   details,
-}: ProjectCardProps) {
+}: Project) {
   return (
     <Card className="group overflow-hidden transition-all duration-300 hover:shadow-lg">
       <div className="relative h-48 w-full overflow-hidden">
@@ -74,10 +57,10 @@ export function ProjectCard({
           <Link href={`/projects/${slug}`}>View Details</Link>
         </Button>
         <div className="flex gap-2">
-          {url && (
+          {demoUrl && (
             <Button variant="ghost" size="icon" asChild>
               <Link
-                href={url}
+                href={demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Live Demo"

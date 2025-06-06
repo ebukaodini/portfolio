@@ -23,8 +23,7 @@ export function Header() {
   return (
     <header className="border-b bg-background relative z-50">
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-60">
-        <Link href="/" className="text-xl font-bold">
-          {/* Ebuka Odini */}
+        <Link href="/" className="text-xl font-bold text-foreground">
           Home
         </Link>
 
@@ -35,8 +34,8 @@ export function Header() {
               key={path.name}
               href={path.href}
               className={`text-sm font-medium hover:underline underline-offset-4 ${
-                pathname === path.href
-                  ? "text-primary"
+                pathname.startsWith(path.href)
+                  ? "font-bold text-foreground"
                   : "text-muted-foreground"
               }`}
             >
