@@ -19,6 +19,8 @@
     --muted-foreground: 24 16% 50%; /* #8c735e */
     --accent: 24 60% 40%; /* #8c5a2b */
     --accent-foreground: 30 20% 98%; /* #f8f5f2 */
+    --success: 120 60% 30%; /* #4caf50 */
+    --success-foreground: 30 20% 98%; /* #f8f5f2 */
     --destructive: 0 80% 60%; /* #e57373 */
     --destructive-foreground: 30 20% 98%; /* #f8f5f2 */
     --border: 30 24% 90%; /* #ece3db */
@@ -59,6 +61,8 @@
     --muted-foreground: 30 20% 70%; /* #cbbba9 */
     --accent: 24 60% 40%; /* #8c5a2b */
     --accent-foreground: 30 20% 98%; /* #f8f5f2 */
+    --success: 120 60% 30%; /* #4caf50 */
+    --success-foreground: 30 20% 98%; /* #f8f5f2 */
     --destructive: 0 80% 60%; /* #e57373 */
     --destructive-foreground: 30 20% 98%; /* #f8f5f2 */
     --border: 24 32% 18%; /* #3b2a1a */
