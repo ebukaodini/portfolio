@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import {
   ArrowRight,
@@ -10,13 +8,26 @@ import {
   Star,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Typewriter } from "react-simple-typewriter";
 import Image from "next/image";
-import { products } from "./projects/page";
 import { ProjectCard } from "@/components/project-card";
 import { Card, CardContent } from "@/components/ui/card";
+import { getPublishedProjects } from "@/model/project";
+import { Project } from "@/interfaces/project";
+import TypeTitles from "@/components/type-titles";
 
-export default function Home() {
+export default async function Home() {
+  let projects: Project[] = [];
+  let featured: Project[] = [];
+
+  try {
+    projects = await getPublishedProjects();
+    // Filter projects into categories
+    featured = projects.filter((project) => project.category === "product");
+  } catch (error) {
+    // If we're on the client side, this will throw
+    console.error("Cannot fetch projects on client side:", error);
+  }
+
   return (
     <div className="relative min-h-screen bg-background">
       <main className="relative z-10 flex-1">
@@ -31,21 +42,7 @@ export default function Home() {
                   <p className="text-xl font-medium text-gray-500 md:text-2xl">
                     <span className="mr-2">I'm a</span>
                     <span className="text-primary">
-                      <Typewriter
-                        words={[
-                          "Software Engineer.",
-                          "Mentor.",
-                          "Knowledge Seeker.",
-                          "Business Enthusiast.",
-                          "Christian.",
-                        ]}
-                        loop={0}
-                        cursor
-                        cursorStyle="|"
-                        typeSpeed={120}
-                        deleteSpeed={120}
-                        delaySpeed={1000}
-                      />
+                      <TypeTitles />
                     </span>
                   </p>
                 </div>
@@ -132,27 +129,29 @@ export default function Home() {
 
             <hr className="my-10 md:my-16" />
 
-            <div className="flex flex-col gap-y-8">
-              <div className="mb-4 flex items-center gap-3">
-                <Star className="h-6 w-6 text-primary" />
-                <h2 className="text-2xl font-bold">Featured Projects</h2>
+            {featured.length > 0 && (
+              <div className="flex flex-col gap-y-8">
+                <div className="mb-4 flex items-center gap-3">
+                  <Star className="h-6 w-6 text-primary" />
+                  <h2 className="text-2xl font-bold">Featured Projects</h2>
+                </div>
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {featured.map((project) => (
+                    <ProjectCard key={project.slug} {...project} />
+                  ))}
+                </div>
+                <Button
+                  asChild
+                  variant={"ghost"}
+                  className="w-fit transition-all duration-300 hover:bg-transparent hover:text-inherit hover:translate-y-[-2px]"
+                >
+                  <Link href={"/projects"}>
+                    More Projects
+                    <ArrowRight className="ml-2 h-4 w-4 hover:translate-x-[-50px]" />
+                  </Link>
+                </Button>
               </div>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {products.map((project) => (
-                  <ProjectCard key={project.slug} {...project} />
-                ))}
-              </div>
-              <Button
-                asChild
-                variant={"ghost"}
-                className="w-fit transition-all duration-300 hover:bg-transparent hover:text-inherit hover:translate-y-[-2px]"
-              >
-                <Link href={"/projects"}>
-                  More Projects
-                  <ArrowRight className="ml-2 h-4 w-4 hover:translate-x-[-50px]" />
-                </Link>
-              </Button>
-            </div>
+            )}
 
             <div className="mt-16">
               <Card className="bg-muted/50">

@@ -302,19 +302,7 @@ export default function AboutPage() {
           <h2 className="text-2xl font-bold text-center mb-8">
             Beyond Code: A Few Fun Facts
           </h2>
-          {/* <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg">Coffee Enthusiast</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  I've visited over 50 specialty coffee shops around the world
-                  and even learned how to roast my own beans.
-                </p>
-              </CardContent>
-            </Card>
-          </div> */}
+
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {funFacts.map((fact, index) => (
               <Card
