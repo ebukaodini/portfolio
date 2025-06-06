@@ -1,6 +1,5 @@
 export interface BlogPost {
-  id: string;
-  slug: string;
+  slug?: string;
   title: string;
   excerpt: string;
   content: string;
@@ -8,7 +7,7 @@ export interface BlogPost {
   tags: string[];
   coverImage: string;
   status: "draft" | "published";
+  featured: boolean;
   createdAt: string;
   publishedAt?: string;
-  featured?: boolean;
 }
