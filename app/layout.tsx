@@ -8,11 +8,11 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Ebuka Odini | Senior Full Stack Engineer",
-  description: "Personal portfolio of Ebuka Odini, Senior Full Stack Engineer",
-  generator: "v0.dev",
+  title: "Odini's website",
+  description: "Personal portfolio of Ebuka Odini, Senior Full Stack Engineer.",
+
   icons: {
-    icon: "/icon.jpeg", // or use "/favicon.svg"
+    icon: "/favicon.ico", // or use "/favicon.svg"
   },
 };
 

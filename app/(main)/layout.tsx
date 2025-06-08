@@ -3,15 +3,6 @@ import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
-export const metadata: Metadata = {
-  title: "Ebuka Odini | Senior Full Stack Engineer",
-  description: "Personal portfolio of Ebuka Odini, Senior Full Stack Engineer",
-  generator: "v0.dev",
-  icons: {
-    icon: "/icon.jpeg", // or use "/favicon.svg"
-  },
-};
-
 // {
 //   metadataBase: new URL('https://example.com'),
 //   title: { default: 'My Site', template: '%s | My Site' },
