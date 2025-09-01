@@ -7,9 +7,9 @@ export default function TypeTitles() {
     <Typewriter
       words={[
         "Software Engineer.",
-        "Mentor.",
         "Knowledge Seeker.",
         "Business Enthusiast.",
+        "Mentor.",
         "Christian.",
       ]}
       loop={0}

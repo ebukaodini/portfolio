@@ -5,8 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getProjectBySlug, getProjectSlugs } from "@/model/project";
 import { notFound } from "next/navigation";
+import projects from "@/content/projects";
 
 // This is a mock project data - in a real app, you would fetch this from an API or CMS
 // const project = {
@@ -109,7 +109,7 @@ export default async function ProjectDetailPage({
 }) {
   let project;
   try {
-    project = await getProjectBySlug(params.slug);
+    project = projects.find((p) => p.slug === params.slug);
   } catch (error) {
     // If we're on the client side, this will throw
     console.error("Cannot fetch project on client side:", error);

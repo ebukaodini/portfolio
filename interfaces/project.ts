@@ -1,29 +1,10 @@
-export interface ProjectDetails {
-  challenge: string;
-  solution: string;
-  impact: string;
-  features: string[];
-}
-
-export interface Screenshots {
-  description: string;
-  image: string;
-}
+type ProjectTag = string | "product" | "dev-tool";
 
 export interface Project {
-  slug?: string;
   title: string;
   description: string;
-  category: string;
-  tags: string[];
+  tags: ProjectTag[];
   image: string;
-  demoUrl: string;
-  githubUrl: string;
-  techStack: string[];
-  screenshots: Screenshots[];
-  details: ProjectDetails;
-  createdAt?: string;
-  status?: "draft" | "published";
+  url: string;
   featured: boolean;
-  publishedAt?: string;
 }

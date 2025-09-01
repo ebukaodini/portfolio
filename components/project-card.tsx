@@ -1,88 +1,50 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Project } from "@/interfaces/project";
 
-export function ProjectCard({
-  slug,
-  title,
-  description,
-  image,
-  tags,
-  demoUrl,
-  githubUrl,
-  details,
-}: Project) {
+export function ProjectCard({ title, description, image, tags, url }: Project) {
   return (
-    <Card className="group overflow-hidden transition-all duration-300 hover:shadow-lg">
-      <div className="relative h-48 w-full overflow-hidden">
-        <Image
-          src={image || "/placeholder.svg"}
-          alt={title}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
-      <CardHeader>
-        <CardTitle className="flex items-center justify-between">
-          <span>{title}</span>
-        </CardTitle>
-        <div className="mt-2 flex flex-wrap gap-1">
-          {tags.slice(0, 4).map((tag) => (
-            <Badge key={tag} variant="secondary" className="text-xs">
-              #{tag}
-            </Badge>
-          ))}
-          {tags.length > 4 && (
-            <Badge variant="outline" className="text-xs">
-              +{tags.length - 4} more
-            </Badge>
-          )}
+    <Link href={url ?? "#"} target="_blank" rel="noopener noreferrer">
+      <Card className="relative group overflow-hidden transition-all duration-300 hover:shadow-lg">
+        <div className="relative h-48 w-full overflow-hidden">
+          <Image
+            src={image || "/placeholder.svg"}
+            alt={title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
         </div>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm text-muted-foreground">{description}</p>
-      </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button asChild>
-          <Link href={`/projects/${slug}`}>View Details</Link>
-        </Button>
-        <div className="flex gap-2">
-          {demoUrl && (
-            <Button variant="ghost" size="icon" asChild>
-              <Link
-                href={demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Live Demo"
-              >
-                <ExternalLink className="h-4 w-4" />
-              </Link>
-            </Button>
-          )}
-          {githubUrl && (
-            <Button variant="ghost" size="icon" asChild>
-              <Link
-                href={githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub Repository"
-              >
-                <Github className="h-4 w-4" />
-              </Link>
-            </Button>
-          )}
+        <div className="absolute top-4 right-4 w-full group">
+          <ExternalLink className="text-muted-foreground h-4 w-4 top-2 right-2 invisible group-hover:visible" />
         </div>
-      </CardFooter>
-    </Card>
+        <CardHeader className="p-3">
+          <CardTitle className="flex items-center justify-between">
+            <span>{title}</span>
+          </CardTitle>
+          <div className="mt-2 flex flex-wrap gap-1">
+            {tags.slice(0, 4).map((tag) => (
+              <Badge
+                key={tag}
+                variant="secondary"
+                className="text-xs font-normal"
+              >
+                #{tag}
+              </Badge>
+            ))}
+            {tags.length > 4 && (
+              <Badge variant="outline" className="text-xs">
+                +{tags.length - 4} more
+              </Badge>
+            )}
+          </div>
+        </CardHeader>
+        <CardContent className="p-3">
+          <p className="text-sm text-muted-foreground">{description}</p>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }

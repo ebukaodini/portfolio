@@ -11,18 +11,15 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ProjectCard } from "@/components/project-card";
 import { Card, CardContent } from "@/components/ui/card";
-import { getPublishedProjects } from "@/model/project";
 import { Project } from "@/interfaces/project";
-import TypeTitles from "@/components/type-titles";
+import projects from "@/content/projects";
 
 export default async function Home() {
-  let projects: Project[] = [];
   let featured: Project[] = [];
 
   try {
-    projects = await getPublishedProjects();
     // Filter projects into categories
-    featured = projects.filter((project) => project.category === "product");
+    featured = projects.filter((project) => project.featured);
   } catch (error) {
     // If we're on the client side, this will throw
     console.error("Cannot fetch projects on client side:", error);
@@ -40,9 +37,8 @@ export default async function Home() {
                     Ebuka Odini
                   </h1>
                   <p className="text-xl font-medium text-gray-500 md:text-2xl">
-                    <span className="mr-2">I'm a</span>
-                    <span className="text-primary">
-                      <TypeTitles />
+                    <span className="mr-2 text-muted-foreground">
+                      Senior Full Stack Engineer
                     </span>
                   </p>
                 </div>
@@ -69,18 +65,15 @@ export default async function Home() {
                       variant="outline"
                       className="transition-all duration-300 hover:translate-y-[-2px]"
                     >
-                      <Link href={"/blog"}>
+                      <Link
+                        href={"https://dev.to/ebukaodini"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         Read Blog
                         <FileText className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
-                    {/* <Button
-                      asChild
-                      variant="secondary"
-                      className="transition-all duration-300 hover:translate-y-[-2px]"
-                    >
-                      <Link href={"/contact"}>Connect</Link>
-                    </Button> */}
                   </div>
                   <div className="flex items-center space-x-4 mt-8">
                     <Link
@@ -93,7 +86,7 @@ export default async function Home() {
                       <span className="sr-only">GitHub</span>
                     </Link>
                     <Link
-                      href="https://linkedin.com/in/ebuka-odini/"
+                      href="https://linkedin.com/in/ebukaodini/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-gray-500 hover:text-gray-900 transition-colors"
@@ -115,9 +108,9 @@ export default async function Home() {
               </div>
 
               {/* Profile Image */}
-              <div className="relative h-40 w-40 md:h-52 md:w-52 overflow-hidden rounded-full border-4 border-white shadow-xl">
+              <div className="relative h-40 w-40 md:h-52 md:w-52 overflow-hidden rounded-full border-4 border-white bg-[#7d4a3b] shadow-xl">
                 <Image
-                  src="/pfp.jpg?height=256&width=256"
+                  src="/profile.png?height=256&width=256"
                   alt="Ebuka Odini"
                   width={256}
                   height={256}
@@ -136,8 +129,8 @@ export default async function Home() {
                   <h2 className="text-2xl font-bold">Featured Projects</h2>
                 </div>
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {featured.map((project) => (
-                    <ProjectCard key={project.slug} {...project} />
+                  {featured.map((project, i) => (
+                    <ProjectCard key={i} {...project} />
                   ))}
                 </div>
                 <Button

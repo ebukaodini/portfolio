@@ -1,5 +1,3 @@
-import { generateShortId } from "./short-id";
-
 export function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -7,5 +5,5 @@ export function slugify(text: string): string {
     .replace(/^-|-$/g, "") // Remove leading and trailing hyphens
     .slice(0, 50) // Limit to 50 characters
     .toLowerCase()
-    .concat(generateShortId());
+    .concat(`-${Date.now()}`);
 }

@@ -9,15 +9,14 @@ import { usePathname } from "next/navigation";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname(); // This is to ensure the component re-renders on route change
+  const hostname = location.hostname;
+  const pathname = usePathname();
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   const paths = [
-    { name: "About", href: "/about" },
-    { name: "Projects", href: "/projects" },
-    { name: "Blog", href: "/blog" },
-    // { name: "Uses", href: "/uses" },
-    // { name: "Contact", href: "/contact" },
+    { name: "About", href: "/about", external: false },
+    { name: "Projects", href: "/projects", external: false },
+    { name: "Blog", href: "https://dev.to/ebukaodini", external: true },
   ];
 
   return (
@@ -33,6 +32,7 @@ export function Header() {
             <Link
               key={path.name}
               href={path.href}
+              target={path.external ? "_blank" : "_self"}
               className={`text-sm font-medium hover:underline underline-offset-4 ${
                 pathname.startsWith(path.href)
                   ? "font-bold text-foreground"
@@ -75,6 +75,7 @@ export function Header() {
               <Link
                 key={path.name}
                 href={path.href}
+                target={path.external ? "_blank" : "_self"}
                 onClick={toggleMenu}
                 className={`w-full ${
                   pathname === path.href

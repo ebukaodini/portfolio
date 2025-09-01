@@ -57,7 +57,7 @@ export default async function BlogPostPage({
           <div className="mb-8 flex items-center gap-3">
             <div className="relative h-10 w-10 overflow-hidden rounded-full">
               <Image
-                src="/pfp.jpg?height=40&width=40"
+                src="/profile.png?height=40&width=40"
                 alt="Ebuka Odini"
                 fill
                 className="object-cover"

@@ -10,31 +10,31 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Odini's website",
   description: "Personal portfolio of Ebuka Odini, Senior Full Stack Engineer.",
-
   icons: {
-    icon: "/favicon.ico", // or use "/favicon.svg"
+    icon: "/favicon.ico",
   },
+  robots: { index: true, follow: true },
+  abstract: "Odini's website",
+  keywords: [
+    "Ebuka Odini",
+    "Odini",
+    "Portfolio",
+    "Developer",
+    "Full Stack Developer",
+    "Software Engineer",
+    "Web Developer",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Node.js",
+    "Next.js",
+    "Frontend Developer",
+    "Backend Developer",
+    "MERN Stack",
+    "Programmer",
+    "Tech Enthusiast",
+  ],
 };
-
-// {
-//   metadataBase: new URL('https://example.com'),
-//   title: { default: 'My Site', template: '%s | My Site' },
-//   description: 'Welcome to My Site',
-//   alternates: {
-//     canonical: 'https://example.com',
-//     languages: {
-//       'en-US': 'https://example.com/en-US',
-//       'de-DE': 'https://example.com/de-DE'
-//     }
-//   },
-//   openGraph: {
-//     title: 'My Site',
-//     description: 'Welcome to My Site',
-//     url: 'https://example.com',
-//     siteName: 'My Site',
-//     images: [{ url: 'https://example.com/og.png' }]
-//   },
-// }
 
 export default function RootLayout({
   children,

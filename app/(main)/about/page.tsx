@@ -25,17 +25,11 @@ import {
   Leaf,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useState } from "react";
-import { TimelineItem, workExperience } from "@/components/timeline-item";
+import { TimelineItem } from "@/components/timeline-item";
 import { TechCategory, techStack } from "@/components/tech-category";
+import experience from "@/content/experience";
 
 const skills = [
   {
@@ -126,7 +120,7 @@ export default function AboutPage() {
           <div className="flex flex-col items-center gap-6 md:items-start">
             <div className="relative h-64 w-64 overflow-hidden rounded-xl border-4 border-white shadow-xl">
               <Image
-                src="/pfp.jpg?height=256&width=256"
+                src="/profile.png?height=256&width=256"
                 alt="Ebuka Odini"
                 width={256}
                 height={256}
@@ -139,7 +133,7 @@ export default function AboutPage() {
               <p className="text-lg text-muted-foreground">
                 Senior Full Stack Engineer
               </p>
-              <p className="text-sm text-gray-500">Utopia Tech Corp</p>
+              <p className="text-sm text-gray-500">7SevenO Tech</p>
             </div>
             <div className="flex gap-3">
               <Button variant="outline" size="icon" asChild>
@@ -154,7 +148,7 @@ export default function AboutPage() {
               </Button>
               <Button variant="outline" size="icon" asChild>
                 <Link
-                  href="https://linkedin.com/in/ebuka-odini"
+                  href="https://linkedin.com/in/ebukaodini"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
@@ -186,24 +180,24 @@ export default function AboutPage() {
               <h2 className="text-2xl font-bold">About Me</h2>
               <div className="mt-4 space-y-4 text-muted-foreground">
                 <p>
-                  I'm a Senior Full Stack Engineer at Utopia Tech Corp where I
-                  and my teammates work on advanced trading platforms designed
-                  to empower financial institutions and brokers with
-                  cutting-edge trading capabilities
+                  Ebuka is a Senior Fullstack Engineer with over 9 years of
+                  experience delivering high-performance, scalable applications
+                  across fintech, HR tech, e-commerce, and edtech. Skilled in
+                  React, Next.js, Node.js, TypeScript, and AWS, he excels at
+                  building end-to-end solutions that balance technical accuracy
+                  with product impact.
                 </p>
                 <p>
-                  With 9+ years of hands-on experience, I help teams turn ideas
-                  into high-performance products, focusing on reliability,
-                  performance, and great developer experience. Whether it's
-                  building internal tools, public platforms, or infrastructure
-                  services, I work across the stack — from UI to APIs to cloud
-                  deployment. I enjoy contributing to open-source projects and
-                  building systems that make other engineers more productive.
+                  At 7SevenO Tech, he developed low-latency trading platforms
+                  managing heavy transaction volumes, while at SeamlessHR, he
+                  led the Backend Tribe, mentoring more than 40 engineers and
+                  driving architectural improvements.
                 </p>
                 <p>
-                  When I'm not coding, you'll find me gaming, working out at the
-                  gym, or mentoring junior developers. I believe in the power of
-                  knowledge sharing and community building.
+                  Known for writing clean, maintainable code and adaptability,
+                  Ebuka thrives in fast-paced, cross-functional environments,
+                  transforming complex challenges into strong, business-oriented
+                  solutions.
                 </p>
               </div>
             </div>
@@ -218,7 +212,7 @@ export default function AboutPage() {
           </div>
 
           <div className="relative space-y-8 pl-6 before:absolute before:left-0 before:top-0 before:h-full before:w-0.5 before:bg-gray-200">
-            {workExperience.map((item, index) => (
+            {experience.map((item, index) => (
               <TimelineItem
                 key={index}
                 hidden={index > 2 && expanded === false}
@@ -256,12 +250,6 @@ export default function AboutPage() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {skills.map((skill, index) => (
-              // <SkillCard
-              //   key={index}
-              //   icon={skill.icon}
-              //   title={skill.title}
-              //   description={skill.description}
-              // />
               <Card
                 key={index}
                 className="p-6 rounded-2xl shadow-md border bg-background hover:shadow-lg transition-all"
@@ -324,29 +312,5 @@ export default function AboutPage() {
         </section>
       </div>
     </div>
-  );
-}
-
-function SkillCard({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) {
-  return (
-    <Card>
-      <CardHeader className="pb-2">
-        <div className="mb-2 flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
-          {icon}
-        </div>
-        <CardTitle>{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <CardDescription>{description}</CardDescription>
-      </CardContent>
-    </Card>
   );
 }
