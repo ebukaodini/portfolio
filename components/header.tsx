@@ -9,7 +9,6 @@ import { usePathname } from "next/navigation";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const hostname = location.hostname;
   const pathname = usePathname();
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
